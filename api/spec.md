@@ -64,7 +64,8 @@ Send a **23194** `get_info` request to the connected wallet and await a **23195*
 ```json
 { "ok": true, "result": { "methods": ["make_invoice","pay_invoice"], "node": "02abc...xyz" } }
 ```
-✅ Now:
-- “Notes” will render bolded.  
-- Each point appears as a bullet list.  
-- Everything is spaced properly for GitHub Markdown.  
+**Notes**
+- Use this call to verify connection health and discover wallet capabilities.  
+- Fallback: read **kind 13194** if the wallet publishes info proactively.  
+- Handle `timeout` and `relay_unreachable` gracefully.  
+
