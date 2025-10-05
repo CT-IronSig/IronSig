@@ -1,1 +1,39 @@
+# IronSig API (Draft)
+
+High-level endpoints for the MVP covering **passwordless authentication** and **Nostr Wallet Connect (NIP-47)**.
+
+---
+
+## 🔐 Authentication
+
+### POST /api/auth/nonce
+Return a signed challenge message used for wallet-based login.
+
+**Response (text block):**
+IronSig Authentication
+Domain: <your-domain>
+Nonce: <uuid>
+Issued At: <iso8601>
+Expires At: <iso8601>
+Purpose: Prove control of this wallet for login only.
+
+**Notes**
+- Bind `Domain` to the frontend host to mitigate phishing.  
+- Short TTL (5–10 minutes). Deny replay.  
+
+---
+
+### POST /api/auth/verify
+Verify a Bitcoin (BIP-322) or Nostr (NIP-07) signature over the challenge.
+
+**Body (one of):**
+```json
+{ "address": "btcAddress", "signature": "base64|hex", "message": "<challenge>" }
+```
+```json
+{ "pubkey": "npub...", "signature": "base64|hex", "message": "<challenge>" }
+```
+```json
+{ "ok": true, "session": "jwt-or-cookie", "user_id": "..." }
+```
 
