@@ -36,4 +36,22 @@ Verify a Bitcoin (BIP-322) or Nostr (NIP-07) signature over the challenge.
 ```json
 { "ok": true, "session": "jwt-or-cookie", "user_id": "..." }
 ```
+---
+
+### POST /api/nwc/connect
+Parse and store a Nostr Wallet Connect (NWC) URI.  
+Persists: `wallet_pubkey`, `relays[]`, **encrypted** `secret`, and `scopes[]`.
+
+**Body:**
+```json
+{ "uri": "nostr+walletconnect://<wallet_pubkey>?relay=wss://...&secret=<hex>[&lud16=...]" }
+```
+**Response:**
+```json
+{ "ok": true, "wallet_pubkey": "npub...", "relays": ["wss://..."], "scopes": ["get_info","make_invoice"] }
+```
+Notes
+Encrypt secret at rest (KMS or OS keyring).
+Never log raw secrets or decrypted payloads.
+Allow users to edit the relay list.
 
