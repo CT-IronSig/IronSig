@@ -55,3 +55,16 @@ Encrypt secret at rest (KMS or OS keyring).
 Never log raw secrets or decrypted payloads.
 Allow users to edit the relay list.
 
+---
+
+### POST /api/nwc/get-info
+Send a **23194** `get_info` request to the connected wallet and await a **23195** response with metadata or supported methods.
+
+**Response:**
+```json
+{ "ok": true, "result": { "methods": ["make_invoice","pay_invoice"], "node": "02abc...xyz" } }
+```
+✅ Now:
+- “Notes” will render bolded.  
+- Each point appears as a bullet list.  
+- Everything is spaced properly for GitHub Markdown.  
